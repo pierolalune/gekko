@@ -19,7 +19,8 @@
     "XLM",
     "XMR",
     "XRP",
-    "ZEC"
+    "ZEC",
+	"COMP"
   ],
   "currencies": [
     "CAD",
@@ -1250,6 +1251,23 @@
       "book": "XZECZUSD",
       "minimalOrder": {
         "amount": "0.03",
+        "unit": "asset"
+      },
+      "pricePrecision": 2,
+      "amountPrecision": 8
+    },
+	{
+      "pair": [
+        "EUR",
+        "COMP"
+      ],
+      "prefixed": [
+        "EUR",
+        "COMP"
+      ],
+      "book": "COMPEUR",
+      "minimalOrder": {
+        "amount": "0.025",
         "unit": "asset"
       },
       "pricePrecision": 2,

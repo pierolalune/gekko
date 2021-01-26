@@ -69,6 +69,9 @@ let getMinTradeSize = asset => {
   case 'XZEC':
     minTradeSize = '0.03'
     break;
+  case 'COMP':
+    minTradeSize = '0.025'
+    break;
   default:
     break;
   }

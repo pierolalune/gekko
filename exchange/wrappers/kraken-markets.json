@@ -20,7 +20,11 @@
     "XMR",
     "XRP",
     "ZEC",
-	"COMP"
+    "COMP",
+    "MANA",
+    "AAVE",
+    "ALGO",
+    "FLOW"
   ],
   "currencies": [
     "CAD",
@@ -1271,6 +1275,74 @@
         "unit": "asset"
       },
       "pricePrecision": 2,
+      "amountPrecision": 8
+    },
+	{
+      "pair": [
+        "EUR",
+        "MANA"
+      ],
+      "prefixed": [
+        "EUR",
+        "MANA"
+      ],
+      "book": "MANAEUR",
+      "minimalOrder": {
+        "amount": "50",
+        "unit": "asset"
+      },
+      "pricePrecision": 5,
+      "amountPrecision": 8
+    },
+	{
+      "pair": [
+        "EUR",
+        "AAVE"
+      ],
+      "prefixed": [
+        "EUR",
+        "AAVE"
+      ],
+      "book": "AAVEEUR",
+      "minimalOrder": {
+        "amount": "0.1",
+        "unit": "asset"
+      },
+      "pricePrecision": 2,
+      "amountPrecision": 8
+    },
+	{
+      "pair": [
+        "EUR",
+        "ALGO"
+      ],
+      "prefixed": [
+        "EUR",
+        "ALGO"
+      ],
+      "book": "ALGOEUR",
+      "minimalOrder": {
+        "amount": "50",
+        "unit": "asset"
+      },
+      "pricePrecision": 5,
+      "amountPrecision": 8
+    },
+	{
+      "pair": [
+        "EUR",
+        "FLOW"
+      ],
+      "prefixed": [
+        "EUR",
+        "FLOW"
+      ],
+      "book": "FLOWEUR",
+      "minimalOrder": {
+        "amount": "1",
+        "unit": "asset"
+      },
+      "pricePrecision": 3,
       "amountPrecision": 8
     }
   ]

@@ -72,6 +72,18 @@ let getMinTradeSize = asset => {
   case 'COMP':
     minTradeSize = '0.025'
     break;
+  case 'MANA':
+    minTradeSize = '50'
+    break;
+  case 'AAVE':
+    minTradeSize = '0.1'
+    break;
+  case 'ALGO':
+    minTradeSize = '50'
+    break;
+  case 'FLOW':
+    minTradeSize = '1'
+    break;
   default:
     break;
   }

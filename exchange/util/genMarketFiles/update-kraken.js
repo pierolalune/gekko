@@ -1,9 +1,11 @@
 const _ = require('lodash');
 const fs = require('fs');
-const request = require('request-promise');
+//Pierolalune, 09.02.2021: Replace request and request-promise with axios
+//const request = require('request-promise');
+const request = require('axios');
 const Promise = require('bluebird');
 
-// Minimum amounts are not queryable, get them here 
+// Minimum amounts are not queryable, get them here
 // https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
 
 let getMinTradeSize = asset => {
@@ -163,5 +165,3 @@ Promise.all([assetPromise, assetPairsPromise])
     console.log(`Couldn't import products from Kraken`);
     console.log(err);
   });
-
-  

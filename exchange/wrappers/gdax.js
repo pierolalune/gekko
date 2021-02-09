@@ -1,4 +1,6 @@
-const Gdax = require('gdax');
+//Pierolalune, 09.02.2021: Replace gdax with coinbase-pro
+//const Gdax = require('gdax');
+const Gdax = require('coinbase-pro');
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -31,7 +33,7 @@ const Trader = function(config) {
     this.pair = [config.asset, config.currency].join('-').toUpperCase();
     this.post_only =
       typeof config.post_only !== 'undefined' ? config.post_only : true;
-    
+
     if (config.sandbox) {
       this.use_sandbox = config.sandbox;
     }

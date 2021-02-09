@@ -31,7 +31,7 @@
     "moment": "^2.20.1",
     "opn": "^4.0.2",
     "promisify-node": "^0.5.0",
-    "prompt-lite": "0.1.1",
+    "prompt": "1.1.0",
     "relieve": "^2.1.3",
     "retry": "^0.10.1",
     "semver": "5.4.1",
@@ -39,14 +39,18 @@
     "stats-lite": "^2.0.4",
     "tiny-promisify": "^0.1.1",
     "toml": "^2.3.0",
-    "ws": "^6.0.0"
+    "ws": "^6.0.0",
+    "talib": "1.0.2",
+    "tulind": "0.8.7",
+    "convnetjs": "0.3.0",
+    "mathjs": "9.2.0",
+    "redis": "0.10.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.0.0",
     "proxyquire": "^1.7.10",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2",
+    "axios": "0.21.1",
     "sinon": "^4.2.0"
   },
   "engines": {

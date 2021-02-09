@@ -5,7 +5,9 @@ const retry = require('../exchangeUtils').retry;
 
 const CryptoJS = require("crypto-js");
 const querystring = require('querystring');
-const request = require('request');
+//Pierolalune, 09.02.2021: Replace request and request-promise with axios
+//const request = require('request');
+const request = require('axios');
 
 API_URL='https://api.exmo.com/v1/';
 
@@ -16,7 +18,7 @@ const Trader = function(config) {
   _.bindAll(this);
   this.key="";
   this.secret="";
-  
+
   if(_.isObject(config)) {
       if(_.isString(config.key)) this.key = config.key;
       if(_.isString(config.secret)) this.secret = config.secret;
@@ -56,10 +58,10 @@ Trader.prototype.api_query = function(method, params, callback){
 	  headers: {'Key': this.key,'Sign': CryptoJS.HmacSHA512(post_data, this.secret).toString(CryptoJS.enc.hex) },
 	  form: params
 	};
-	
+
  	request.post(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            data=JSON.parse(body);          
+            data=JSON.parse(body);
             if(data.error) error = { message: data.error }
             else if (data.result!=undefined && data.result==false)  error = { message: '"result": false' } ;
             callback(error, data);
@@ -84,7 +86,7 @@ Trader.prototype.getTrades = function(since, callback, descending) {
 
     data=data[this.pair];
 
-    var parsedTrades =  _.map(data, function(trade) {   
+    var parsedTrades =  _.map(data, function(trade) {
         return {
           tid: trade.trade_id,
           date: trade.date,
@@ -98,7 +100,7 @@ Trader.prototype.getTrades = function(since, callback, descending) {
   };
 
   const fetch = cb => this.api_query("trades", { pair: this.pair} , cb);
-  retry(null, fetch, processResponse); 
+  retry(null, fetch, processResponse);
 
 }
 
@@ -152,7 +154,7 @@ Trader.prototype.sell = function(amount, price, callback) {
 Trader.prototype.getOrder = function(order_id, callback) {
   const processResponse = (err, data) => {
 
-    if(err) 
+    if(err)
       return callback(err);
 
     data=data[this.pair];
@@ -167,13 +169,13 @@ Trader.prototype.getOrder = function(order_id, callback) {
   }
 
   const fetch = cb => this.api_query("user_trades", { pair: this.pair} , cb);
-  retry(null, fetch, processResponse); 
+  retry(null, fetch, processResponse);
 }
 
 Trader.prototype.checkOrder = function(order_id, callback) {
   const processResponse = (err, data) => {
 
-    if(err) 
+    if(err)
       return callback(err);
 
     data=data[this.pair];
@@ -183,7 +185,7 @@ Trader.prototype.checkOrder = function(order_id, callback) {
     }
 
     const order = _.find(data, function(o) { return o.order_id === +order_id });
-    if(!order) 
+    if(!order)
       return callback(undefined, { executed: true, open: false });
 
     callback(undefined, { executed: false, open: true /*, filledAmount: order.startingAmount - order.amount*/ });

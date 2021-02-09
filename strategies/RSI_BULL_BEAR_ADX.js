@@ -129,35 +129,50 @@ var strat = {
 			
 		// BEAR TREND
 		// NOTE: maFast will always be under maSlow if maSlow can't be calculated
-		if( maFast < maSlow )
+		if( maFast < maSlow ) // if fast SMA < slow SMA
 		{
+			// Use bear RSI, create rsi_hi and rsi_low variables and use bear high and bear low settings
 			rsi = ind.BEAR_RSI.result;
 			let rsi_hi = this.settings.BEAR.high,
 				rsi_low = this.settings.BEAR.low;
 			
-			// ADX trend strength?
+			// if current ADX > settings ADX high, add bear mod high to rsi_hi
+			// if strong trend, rsi has to be even higher to sell
 			if( adx > this.settings.ADX.high ) rsi_hi = rsi_hi + this.BEAR_MOD_high;
+			// else if current ADX < settings ADX low, add bear mod low to rsi_low
+			// if weak trend, rsi has to be even lower to buy
 			else if( adx < this.settings.ADX.low ) rsi_low = rsi_low + this.BEAR_MOD_low;
-				
-			if( rsi > rsi_hi ) this.short();
-			else if( rsi < rsi_low ) this.long();
 			
+			// if current rsi > rsi_hi, sell
+			if( rsi > rsi_hi ) this.short();
+			// else if rsi < rsi_low, buy
+			else if( rsi < rsi_low ) this.long();
+
+			// Run low high method if debug is on
 			if(this.debug) this.lowHigh( rsi, 'bear' );
 		}
 
 		// BULL TREND
 		else
 		{
+			// Use bull RSI, create rsi_hi and rsi_low variables and use bull rsi high and bull rsi low settings
 			rsi = ind.BULL_RSI.result;
 			let rsi_hi = this.settings.BULL.high,
 				rsi_low = this.settings.BULL.low;
 			
-			// ADX trend strength?
-			if( adx > this.settings.ADX.high ) rsi_hi = rsi_hi + this.BULL_MOD_high;		
+			// if current ADX > settings ADX high, add bull mod high to rsi_hi
+			// if strong trend, rsi has to be even higher to sell
+			if( adx > this.settings.ADX.high ) rsi_hi = rsi_hi + this.BULL_MOD_high;	
+			// else if current ADX < settings ADX low, add bull mod low to rsi_low
+			// if weak trend, rsi has to be even lower to buy
 			else if( adx < this.settings.ADX.low ) rsi_low = rsi_low + this.BULL_MOD_low;
 				
+			// if current rsi > rsi_hi, sell
 			if( rsi > rsi_hi ) this.short();
+			// else if rsi < rsi_low, buy
 			else if( rsi < rsi_low )  this.long();
+
+			// Run low high method if debug is on
 			if(this.debug) this.lowHigh( rsi, 'bull' );
 		}
 		

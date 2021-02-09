@@ -12,6 +12,7 @@ _.each(subscriptions, sub => {
 
   EventLogger.prototype[sub.handler] = (event, next) => {
     log.info(`\t\t\t\t[EVENT ${sub.event}]\n`, event);
+    log.remote(`\t\t\t\t[EVENT ${sub.event}]\n`, event);
     if(_.isFunction(next))
       next();
   }

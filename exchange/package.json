@@ -33,7 +33,7 @@
     "kraken-api": "askmike/npm-kraken-api#a69dfb3eb296b9c795cfa48dd31edcdc1b3d5398",
     "lodash": "^4.17.5",
     "moment": "^2.22.1",
-    "request-promise": "^4.2.2",
+    "axios": "^0.21.1",
     "retry": "^0.12.0",
     "therocktrading": "^0.9.0"
   }

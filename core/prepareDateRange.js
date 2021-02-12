@@ -1,5 +1,7 @@
 var _ = require('lodash');
-var prompt = require('prompt-lite');
+//Pierolalune, 12.02.2021: Replace prompt-lite with prompt
+//var prompt = require('prompt-lite');
+var prompt = require('prompt');
 var moment = require('moment');
 
 var util = require('./util');
@@ -32,7 +34,7 @@ module.exports = function(done) {
       log.info('\t', 'from:', moment.unix(r.from).utc().format('YYYY-MM-DD HH:mm:ss'));
       log.info('\t', 'to:', moment.unix(r.to).utc().format('YYYY-MM-DD HH:mm:ss'));
 
-      
+
       setDateRange(r.from, r.to);
       return done();
     }

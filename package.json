@@ -45,10 +45,10 @@
     "ws": "^6.0.0"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "chai": "^4.1.2",
     "mocha": "^8.3.0",
     "proxyquire": "^1.7.10",
-    "axios": "^0.21.1",
     "sinon": "^4.2.0"
   },
   "engines": {

@@ -1,4 +1,6 @@
-const Gdax = require('gdax');
+//Pierolalune, 15.02.2021, replace gdax 0.7.0 with coinbase-pro 0.9.0
+//const Gdax = require('gdax');
+const Gdax = require('coinbase-pro');
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -31,7 +33,7 @@ const Trader = function(config) {
     this.pair = [config.asset, config.currency].join('-').toUpperCase();
     this.post_only =
       typeof config.post_only !== 'undefined' ? config.post_only : true;
-    
+
     if (config.sandbox) {
       this.use_sandbox = config.sandbox;
     }
@@ -413,7 +415,7 @@ Trader.prototype.getMaxDecimalsNumber = function(number, decimalLimit = 8) {
 Trader.getCapabilities = function() {
   return {
     name: 'GDAX',
-    slug: 'gdax',
+    slug: 'coinbase-pro',
     currencies: marketData.currencies,
     assets: marketData.assets,
     markets: marketData.markets,

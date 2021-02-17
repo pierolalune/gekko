@@ -15,7 +15,9 @@ const marketData = require('./exmo-markets.json');
 
 
 const Trader = function(config) {
-  _.bindAll(this);
+  // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
+  // _.bindAll(this);
+  _.bindAll(this, _.functions(this).sort());
   this.key="";
   this.secret="";
   

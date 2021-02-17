@@ -23,7 +23,9 @@ if(!to.isValid())
 
 var Market = function() {
 
-  _.bindAll(this);
+  // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
+  // _.bindAll(this);
+  _.bindAll(this, _.functions(this).sort());
   this.pushing = false;
   this.ended = false;
   this.closed = false;

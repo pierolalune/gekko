@@ -20,7 +20,9 @@ var CandleBatcher = function(candleSize) {
   this.smallCandles = [];
   this.calculatedCandles = [];
 
-  _.bindAll(this);
+  // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
+  // _.bindAll(this);
+  _.bindAll(this, _.functions(this).sort());
 }
 
 util.makeEventEmitter(CandleBatcher);

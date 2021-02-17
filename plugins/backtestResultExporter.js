@@ -33,7 +33,9 @@ const BacktestResultExporter = function() {
   if(!config.backtestResultExporter.data.trades)
     this.processTradeCompleted = null;
 
-  _.bindAll(this);
+  // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
+  // _.bindAll(this);
+  _.bindAll(this, _.functions(this).sort());
 }
 
 BacktestResultExporter.prototype.processPortfolioValueChange = function(portfolio) {

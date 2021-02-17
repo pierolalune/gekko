@@ -5,7 +5,9 @@ var Ranger = require('ranger');
 var config = require('../core/util').getConfig().campfire;
 
 var Actor = function() {
-  _.bindAll(this);
+  // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
+  // _.bindAll(this);
+  _.bindAll(this, _.functions(this).sort());
 
   this.commands = [{
     'handler': 'advice',

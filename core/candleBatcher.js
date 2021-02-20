@@ -34,10 +34,21 @@ CandleBatcher.prototype.write = function(candles) {
 
   this.emitted = 0;
 
-  _.each(candles, function(candle) {
-    this.smallCandles.push(candle);
-    this.check();
-  }, this);
+  // Pierolalune, 18.02.2021, prepare _.each for lodash upgrade
+  // _.each(candles, function(candle) {
+  //   this.smallCandles.push(candle);
+  //   this.check();
+  // }, this);
+  _.each(
+    candles, 
+    _.bind(
+      function(candle) {
+        this.smallCandles.push(candle);
+        this.check();
+      }, 
+      this
+    )
+  );
 
   return this.emitted;
 }

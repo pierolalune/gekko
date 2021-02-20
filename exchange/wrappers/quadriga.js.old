@@ -64,14 +64,14 @@ Trader.prototype.getTrades = function(since, callback, descending) {
     if (err) return this.retry(this.getTrades, 'unable to get trades', args, err);
 
     var parsedTrades = [];
-    _.each(trades, function(trade) {
+    _.each(trades, _.bind(function(trade) {
       parsedTrades.push({
         tid: trade.tid,
         date: trade.date,
         price: parseFloat(trade.price),
         amount: parseFloat(trade.amount)
       });
-    }, this);
+    }, this));
 
     if(descending)
       callback(null, parsedTrades);

@@ -53,10 +53,10 @@ var Base = function(settings) {
   this._currentDirection;
 
   // make sure we have all methods
-  _.each(['init', 'check'], function(fn) {
+  _.each(['init', 'check'], _.bind(function(fn) {
     if(!this[fn])
       util.die('No ' + fn + ' function in this strategy found.')
-  }, this);
+  }, this));
 
   if(!this.update)
     this.update = function() {};
@@ -121,12 +121,12 @@ Base.prototype.isBusy = function() {
 Base.prototype.calculateSyncIndicators = function(candle, done) {
   // update all indicators
   var price = candle[this.priceValue];
-  _.each(this.indicators, function(i) {
+  _.each(this.indicators, _.bind(function(i) {
     if(i.input === 'price')
       i.update(price);
     if(i.input === 'candle')
       i.update(candle);
-  },this);
+  },this));
 
   this.propogateTick(candle);
 

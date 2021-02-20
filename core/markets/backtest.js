@@ -91,10 +91,18 @@ Market.prototype.processCandles = function(err, candles) {
     log.warn(`Simulation based on incomplete market data (${this.batchSize - amount} missing between ${from} and ${to}).`);
   }
 
-  _.each(candles, function(c, i) {
-    c.start = moment.unix(c.start);
-    this.push(c);
-  }, this);
+  // Pierolalune, 18.02.2021, prepare _.each for lodash upgrade. 
+  // thisArgs disappears, can be solved with binding function with this.
+  _.each(
+    candles, 
+    _.bind(
+      function(c, i) {
+        c.start = moment.unix(c.start);
+        this.push(c);
+      }, 
+      this
+    )
+  );
 
   this.pushing = false;
 

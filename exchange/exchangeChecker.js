@@ -88,11 +88,16 @@ Checker.prototype.cantTrade = function(conf) {
   if(conf.secret === 'your-secret')
     return '"your-secret" is not a valid API secret';
 
+  // Pierolalune, 18.02.2021, prepare _.each for lodash upgrade.
+  // thisArgs disappears, can be solved with binding function with this.
   var error = false;
-  _.each(exchange.requires, function(req) {
-    if(!conf[req])
-      error = name + ' requires "' + req + '" to be set in the config';
-  }, this);
+  _.each(
+    exchange.requires,
+    _.bind(function (req) {
+      if (!conf[req])
+        error = name + ' requires "' + req + '" to be set in the config';
+    }, this)
+  );
 
   return error;
 }

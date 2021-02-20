@@ -31,7 +31,7 @@ var Actor = function(done) {
 // emit.
 
 var proto = {};
-_.each(redisBeacon.broadcast, function(e) {
+_.each(redisBeacon.broadcast, _.bind(function(e) {
   // grab the corresponding subscription 
   var subscription = _.find(subscriptions, function(s) { return s.event === e });
 
@@ -50,7 +50,7 @@ _.each(redisBeacon.broadcast, function(e) {
     }, cb);
   };
 
-}, this)
+}, this))
 
 Actor.prototype = proto;
 

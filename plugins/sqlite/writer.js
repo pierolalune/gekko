@@ -45,9 +45,15 @@ Store.prototype.upsertTables = function() {
 
   var next = _.after(_.size(createQueries), this.done);
 
-  _.each(createQueries, function(q) {
-    this.db.run(q, next);
-  }, this);
+  _.each(
+    createQueries, 
+    _.bind(
+      function(q) {
+        this.db.run(q, next);
+      }, 
+      this
+    )
+  );
 }
 
 Store.prototype.writeCandles = function() {

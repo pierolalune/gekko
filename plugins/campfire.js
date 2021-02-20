@@ -108,11 +108,11 @@ Actor.prototype = {
     if (message.userId === this.user.id) return false; // Make the bot ignore itself
     if (message.body === null) return false; // Handle weird cases where body is null sometimes
 
-    _.each(this.commands, function(command) {
+    _.each(this.commands, _.bind(function(command) {
       if (this.textHasCommandForBot(message.body, config.nickname, command.handler)) {
         command.callback();
       }
-    }, this);
+    }, this));
   },
 
   textHasCommandForBot: function(text, nickname, handler) {

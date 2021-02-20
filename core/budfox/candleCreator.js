@@ -92,15 +92,23 @@ CandleCreator.prototype.filter = function(trades) {
 }
 
 // put each trade in a per minute bucket
+// Pierolalune, 18.02.2021, prepare _.each for lodash upgrade. 
+// thisArgs disappears, can be solved with binding function with this.
 CandleCreator.prototype.fillBuckets = function(trades) {
-  _.each(trades, function(trade) {
-    var minute = trade.date.format('YYYY-MM-DD HH:mm');
+  _.each(
+    trades, 
+    _.bind(
+      function(trade) {
+        var minute = trade.date.format('YYYY-MM-DD HH:mm');
 
-    if(!(minute in this.buckets))
-      this.buckets[minute] = [];
+        if(!(minute in this.buckets))
+          this.buckets[minute] = [];
 
-    this.buckets[minute].push(trade);
-  }, this);
+        this.buckets[minute].push(trade);
+      }, 
+      this
+    )
+  );
 
   this.lastTrade = _.last(trades);
 }

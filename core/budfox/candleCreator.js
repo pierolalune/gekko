@@ -86,9 +86,9 @@ CandleCreator.prototype.write = function(batch) {
 CandleCreator.prototype.filter = function(trades) {
   // make sure we only include trades more recent
   // than the previous emitted candle
-  return _.filter(trades, function(trade) {
+  return _.filter(trades, _.bind(function(trade) {
     return trade.date > this.threshold;
-  }, this);
+  }, this));
 }
 
 // put each trade in a per minute bucket

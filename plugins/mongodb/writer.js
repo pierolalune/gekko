@@ -53,7 +53,7 @@ Store.prototype.writeCandles = function writeCandles () {
   this.historyCollection.insert(candles, { ordered: false }, e => {
     if (e) {
       let msg = 'mongojs insert() ' + e.writeErrors.length + ' of ' + candles.length + ' failed.';
-      _.forEach(_.countBy(e.writeErrors, 'code'), (c, k) => {
+      _.each(_.countBy(e.writeErrors, 'code'), (c, k) => {
         msg += ' Code: E' + k + ' count: ' + c;
       });
       log.debug(msg);

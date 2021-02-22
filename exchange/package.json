@@ -4,7 +4,8 @@
   "description": "Gekko's order execution library for bitcoin & crypto exchanges",
   "main": "gekkoBroker.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clear": "rm package-lock.json && rm -r node_modules"
   },
   "repository": {
     "type": "git",

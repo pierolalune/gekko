@@ -11,7 +11,10 @@
   ],
   "scripts": {
     "test": "./node_modules/.bin/mocha test/*.js --recursive test -u tdd --reporter spec",
-    "start": "node ./gekko --config config.js --ui"
+    "start": "node ./gekko --config config.js --ui",
+    "clear_all": "rm package-lock.json && rm -r node_modules && rm exchange/package-lock.json && rm -r exchange/node_modules",
+    "clear": "rm package-lock.json && rm -r node_modules",
+    "import": "node ./gekko --config config_import_test.js --import"
   },
   "author": "Mike van Rossum <mike@mvr.me>",
   "dependencies": {

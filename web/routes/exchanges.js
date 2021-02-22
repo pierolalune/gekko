@@ -15,7 +15,7 @@ module.exports = function *() {
   const exchangesDir = yield fs.readdir(gekkoRoot + 'exchange/wrappers/');
   const exchanges = exchangesDir
     //.filter(f => _.takeRight(f, 3).join('') === '.js')
-    .filter(f => _.endsWith(f, '.js'))
+    .filter(f => f.endsWith('.js'))
     .map(f => f.slice(0, -3));
 
   let allCapabilities = [];

@@ -18,7 +18,7 @@ config.watch = {
   // see https://gekko.wizb.it/docs/introduction/supported_exchanges.html
   exchange: 'kraken',
   currency: 'EUR',
-  asset: 'XRP',
+  asset: 'AAVE',
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -359,8 +359,8 @@ config.backtest = {
 config.importer = {
   daterange: {
     // NOTE: these dates are in UTC
-    from: "2021-01-01 00:00:00",
-    to: "2021-02-01 00:00:00"
+    from: "2021-02-01 00:00:00",
+    to: "2021-03-01 00:00:00"
   }
 }
 

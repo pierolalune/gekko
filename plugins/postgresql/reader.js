@@ -11,7 +11,7 @@ const { Query } = require('pg');
 var Reader = function() {
   // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
   this.db = handle;
 }
 

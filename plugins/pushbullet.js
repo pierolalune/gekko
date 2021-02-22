@@ -43,7 +43,7 @@ var pbConf = config.pushbullet;
 var Pushbullet = function(done) {
   // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
 
   this.pusher;
   this.price = 'N/A';

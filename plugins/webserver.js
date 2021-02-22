@@ -6,7 +6,7 @@ var Server = require('../web/server.js');
 var Actor = function(next) {
   // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
 
   this.server = new Server();
   this.server.setup(next);

@@ -10,7 +10,7 @@ var Actor = function() {
   this.marketTime = {format: function() {return 'N/A'}};
   // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
 }
 
 Actor.prototype.processCandle = function(candle, done) {

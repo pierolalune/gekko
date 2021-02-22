@@ -51,7 +51,7 @@ var util = require(__dirname + '/../util');
 var CandleCreator = function() {
   // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
 
   // TODO: remove fixed date
   this.threshold = moment("1970-01-01", "YYYY-MM-DD");

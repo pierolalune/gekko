@@ -8,7 +8,7 @@ var mailConfig = config.mailer;
 var Mailer = function(done) {
   // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
 
   this.server;
   this.price = 'N/A';

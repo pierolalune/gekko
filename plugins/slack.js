@@ -8,7 +8,7 @@ const slackConfig = config.slack;
 const Slack = function(done) {
     // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
   // _.bindAll(this);
-  _.bindAll(this, _.functions(this).sort());
+  _.bindAll(this, _.functionsIn(this).sort());
 
     this.slack;
     this.price = 'N/A';

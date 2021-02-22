@@ -88,9 +88,9 @@ Actor.prototype = {
   },
 
   pasteDescriptions: function() {
-    var descriptions = _.map(this.commands, function(command) {
+    var descriptions = _.map(this.commands, _.bind(function(command) {
       return [command.handler + ':', command.description].join(' ');
-    }, this).join('\n');
+    }, this)).join('\n');
 
     this.room.paste(descriptions);
   },

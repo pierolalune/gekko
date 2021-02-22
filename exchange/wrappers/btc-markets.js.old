@@ -48,12 +48,12 @@ Trader.prototype.getPortfolio = function(callback) {
     if(!_.isEmpty(data.errorMessage))
       return callback('BTC-MARKET API ERROR: ' + data.errorMessage);
 
-    var portfolio = _.map(data, function(balance) {
+    var portfolio = _.map(data, _.bind(function(balance) {
       return {
         name: balance.currency,
         amount: balance.balance / this.priceDivider
       }
-    }, this);
+    }, this));
 
     callback(err, portfolio);
   }.bind(this);

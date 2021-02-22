@@ -122,7 +122,7 @@ CandleCreator.prototype.calculateCandles = function() {
     // create a string referencing the minute this trade happened in
     var lastMinute = this.lastTrade.date.format('YYYY-MM-DD HH:mm');
 
-  var candles = _.map(this.buckets, function(bucket, name) {
+  var candles = _.map(this.buckets, _.bind(function(bucket, name) {
     var candle = this.calculateCandle(bucket);
 
     // clean all buckets, except the last one:
@@ -131,7 +131,7 @@ CandleCreator.prototype.calculateCandles = function() {
       delete this.buckets[name];
 
     return candle;
-  }, this);
+  }, this));
 
   return candles;
 }

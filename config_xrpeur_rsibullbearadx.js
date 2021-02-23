@@ -33,14 +33,14 @@ config.watch = {
 config.tradingAdvisor = {
   enabled: true,
   method: 'RSI_BULL_BEAR_ADX',
-  candleSize: 15,
+  candleSize: 10,
   historySize: 200,
 }
 
 config.RSI_BULL_BEAR_ADX = {
 SMA:{
-long: 1000,
-short: 50},
+long: 200,
+short: 30},
 
 BULL:{
 rsi: 10,

@@ -14,7 +14,8 @@
     "start": "node ./gekko --config config.js --ui",
     "clear_all": "rm package-lock.json && rm -r node_modules && rm exchange/package-lock.json && rm -r exchange/node_modules",
     "clear": "rm package-lock.json && rm -r node_modules",
-    "import": "node ./gekko --config config_import_test.js --import"
+    "import": "node ./gekko --config config_import_test.js --import",
+    "backtest": "node ./gekko --config config_backtest_test.js --backtest"
   },
   "author": "Mike van Rossum <mike@mvr.me>",
   "dependencies": {

@@ -13,7 +13,8 @@ var Store = function(done, pluginMeta) {
   this.done = done;
 
   this.db = sqlite.initDB(false);
-  this.db.serialize(this.upsertTables);
+  //this.db.serialize(this.upsertTables);
+  this.upsertTables();
 
   this.cache = [];
   this.buffered = util.gekkoMode() === "importer";
@@ -48,9 +49,12 @@ Store.prototype.upsertTables = function() {
   _.each(
     createQueries, 
     _.bind(
-      function(q) {
-        this.db.run(q, next);
-      }, 
+      this.db.transaction(
+        (q) => {
+          this.db.prepare(q).run();
+          next();
+        }
+      ), 
       this
     )
   );
@@ -60,22 +64,14 @@ Store.prototype.writeCandles = function() {
   if(_.isEmpty(this.cache))
     return;
 
-  const transaction = () => {
-    this.db.run("BEGIN TRANSACTION");
-
-    var stmt = this.db.prepare(`
+  var stmt = this.db.prepare(`
       INSERT OR IGNORE INTO ${sqliteUtil.table('candles')}
       VALUES (?,?,?,?,?,?,?,?,?)
-    `, function(err, rows) {
-        if(err) {
-          log.error(err);
-          return util.die('DB error at INSERT: '+ err);
-        }
-      });
+    `);
 
-    _.each(this.cache, candle => {
-      stmt.run(
-        null,
+  const transaction = this.db.transaction((candles) => {
+    for (const candle of candles) {
+      stmt.run(null,
         candle.start.unix(),
         candle.open,
         candle.high,
@@ -83,19 +79,18 @@ Store.prototype.writeCandles = function() {
         candle.close,
         candle.vwp,
         candle.volume,
-        candle.trades
-      );
-    });
+        candle.trades);
+    }
+    candles = [];
+  });
 
-    stmt.finalize();
-    this.db.run("COMMIT");
+    //stmt.finalize();
+    //this.db.run("COMMIT");
     // TEMP: should fix https://forum.gekko.wizb.it/thread-57279-post-59194.html#pid59194
-    this.db.run("pragma wal_checkpoint;");
-    
-    this.cache = [];
-  }
+    //this.db.run("pragma wal_checkpoint;");
 
-  this.db.serialize(transaction);
+  transaction(this.cache);
+  this.db.pragma('wal_checkpoint');
 }
 
 var processCandle = function(candle, done) {

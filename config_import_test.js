@@ -18,12 +18,7 @@ config.watch = {
   // see https://gekko.wizb.it/docs/introduction/supported_exchanges.html
   exchange: 'kraken',
   currency: 'EUR',
-  asset: 'XRP',
-
-  // You can set your own tickrate (refresh rate).
-  // If you don't set it, the defaults are 2 sec for
-  // okcoin and 20 sec for all other exchanges.
-  // tickrate: 20
+  asset: 'COMP',
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,35 +26,27 @@ config.watch = {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 config.tradingAdvisor = {
-  enabled: true,
-  method: 'RSI_BULL_BEAR_ADX',
-  candleSize: 10,
-  historySize: 200,
+  enabled: false,
+  method: 'MACD',
+  candleSize: 60,
+  historySize: 10,
 }
 
-config.RSI_BULL_BEAR_ADX = {
-SMA:{
-long: 200,
-short: 30},
-
-BULL:{
-rsi: 10,
-high: 80,
-low: 60,
-mod_high: 5,
-mod_low: -5},
-
-BEAR:{
-rsi: 15,
-high: 50,
-low: 20,
-mod_high: 15,
-mod_low: -5},
-
-ADX:{
-adx: 3,
-high: 70,
-low: 50}
+// MACD settings:
+config.MACD = {
+  // EMA weight (α)
+  // the higher the weight, the more smooth (and delayed) the line
+  short: 10,
+  long: 21,
+  signal: 9,
+  // the difference between the EMAs (to act as triggers)
+  thresholds: {
+    down: -0.025,
+    up: 0.025,
+    // How many candle intervals should a trend persist
+    // before we consider it real?
+    persistence: 1
+  }
 };
 
 // settings for other strategies can be found at the bottom, note that only
@@ -71,7 +58,7 @@ low: 50}
 
 // do you want Gekko to simulate the profit of the strategy's own advice?
 config.paperTrader = {
-  enabled: true,
+  enabled: false,
   // report the profit in the currency or the asset?
   reportInCurrency: true,
   // start balance, on what the current balance is compared with
@@ -89,7 +76,7 @@ config.paperTrader = {
 }
 
 config.performanceAnalyzer = {
-  enabled: true,
+  enabled: false,
   riskFreeReturn: 5
 }
 
@@ -118,6 +105,13 @@ config.pushover = {
   tag: '[GEKKO]',
   key: '',
   user: ''
+}
+
+config.blotter = {
+  enabled: false,
+  filename: 'blotter.csv',
+  dateFormat: 'l LT',
+  timezone: -300, // -300 minutes for EST(-5:00), only used if exchange doesn't provide correct timezone
 }
 
 // want Gekko to send a mail on buy or sell advice?
@@ -193,10 +187,10 @@ config.ircbot = {
 }
 
 config.telegrambot = {
-  enabled: true,
+  enabled: false,
   // Receive notifications for trades and warnings/errors related to trading
   emitTrades: false,
-  token: '1507242979:AAHTFlk-ouvXLes0ji_DCnGEZbxzNk10_S0',
+  token: 'YOUR_TELEGRAM_BOT_TOKEN',
 };
 
 config.twitter = {
@@ -289,6 +283,12 @@ config.backtestResultExporter = {
   }
 }
 
+config.candleUploader = {
+  enabled: false,
+  url: '',
+  apiKey: ''
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                       CONFIGURING ADAPTER
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -297,6 +297,17 @@ config.adapter = 'sqlite';
 
 config.sqlite = {
   path: 'plugins/sqlite',
+
+  dataDirectory: 'history',
+  version: 0.1,
+
+  journalMode: require('./web/isWindows.js') ? 'DELETE' : 'WAL',
+
+  dependencies: []
+}
+
+config.bettersqlite = {
+  path: 'plugins/bettersqlite',
 
   dataDirectory: 'history',
   version: 0.1,
@@ -330,6 +341,12 @@ config.mongodb = {
   }]
 }
 
+config.candleUploader = {
+  enabled: false,
+  url: '',
+  apiKey: ''
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                       CONFIGURING BACKTESTING
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -353,8 +370,8 @@ config.backtest = {
 config.importer = {
   daterange: {
     // NOTE: these dates are in UTC
-    from: "2017-11-01 00:00:00",
-    to: "2017-11-20 00:00:00"
+    from: "2021-01-01 00:00:00",
+    to: "2021-02-22 00:00:00"
   }
 }
 

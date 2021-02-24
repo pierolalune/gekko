@@ -11,7 +11,11 @@
   ],
   "scripts": {
     "test": "./node_modules/.bin/mocha test/*.js --recursive test -u tdd --reporter spec",
-    "start": "node ./gekko --config config.js --ui"
+    "start": "node ./gekko --config config.js --ui",
+    "clear_all": "rm package-lock.json && rm -r node_modules && rm exchange/package-lock.json && rm -r exchange/node_modules",
+    "clear": "rm package-lock.json && rm -r node_modules",
+    "import": "node ./gekko --config config_import_test.js --import",
+    "backtest": "node ./gekko --config config_backtest_test.js --backtest"
   },
   "author": "Mike van Rossum <mike@mvr.me>",
   "dependencies": {
@@ -20,7 +24,6 @@
     "co-fs": "^1.2.0",
     "commander": "^2.13.0",
     "convnetjs": "^0.3.0",
-    "gekko": "0.0.9",
     "humanize-duration": "^3.10.0",
     "koa": "^1.2.0",
     "koa-bodyparser": "^2.2.0",
@@ -28,27 +31,30 @@
     "koa-logger": "^1.3.0",
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
-    "lodash": "2.x",
+    "lodash": "^4.17.15",
     "mathjs": "^9.0.0",
     "moment": "^2.20.1",
     "node-telegram-bot-api": "^0.24.0",
     "opn": "^4.0.2",
     "promisify-node": "^0.5.0",
-    "prompt-lite": "0.1.1",
+    "prompt": "1.1.0",
+    "redis": "0.10.0",
     "relieve": "^2.1.3",
     "retry": "^0.10.1",
     "semver": "5.4.1",
-    "sqlite3": "^4.0.6",
+    "sqlite3": "4.2.0",
     "stats-lite": "^2.0.4",
+    "talib": "^1.1.3",
     "tiny-promisify": "^0.1.1",
     "toml": "^2.3.0",
+    "tulind": "0.8.7",
     "ws": "^6.0.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.0.0",
-    "proxyquire": "^1.7.10",
     "axios": "^0.21.1",
+    "chai": "^4.1.2",
+    "mocha": "^8.3.0",
+    "proxyquire": "^1.7.10",
     "sinon": "^4.2.0"
   },
   "engines": {

@@ -54,10 +54,22 @@ if(config.debug && mode !== 'importer') {
       this.flushDefferedEvents();
       _done();
     });
-    _.each(this.candleConsumers, function(c) {
-      at = c.meta.name;
-      c.processCandle(chunk, flushEvents);
-    }, this);
+    // Pierolalune, 18.02.2021, prepare _.each for lodash upgrade
+    // _.each(this.candleConsumers, function(c) {
+    //   at = c.meta.name;
+    //   c.processCandle(chunk, flushEvents);
+    // }, this);
+    _.each(
+      this.candleConsumers, 
+      _.bind(
+        function(c) {
+          at = c.meta.name;
+          c.processCandle(chunk, flushEvents);
+        }, 
+        this
+      )
+    );
+
   }
 } else {
   // skip decoration
@@ -70,9 +82,17 @@ if(config.debug && mode !== 'importer') {
       this.flushDefferedEvents();
       _done();
     });
-    _.each(this.candleConsumers, function(c) {
-      c.processCandle(chunk, flushEvents);
-    }, this);
+    // Pierolalune, 18.02.2021, prepare _.each for lodash upgrade. 
+    // thisArgs disappears, can be solved with binding function with this.
+    _.each(
+      this.candleConsumers, 
+      _.bind(
+        function(c) {
+          c.processCandle(chunk, flushEvents);
+        }, 
+        this
+      )
+    );
   }
 }
 

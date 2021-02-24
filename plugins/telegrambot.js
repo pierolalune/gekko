@@ -8,7 +8,9 @@ const utc = moment.utc;
 const telegram = require("node-telegram-bot-api");
 
 const Actor = function() {
-  _.bindAll(this);
+  // Pierolalune, 17.02.2021: Prepare Bind all for lodash upgrade
+  // _.bindAll(this);
+  _.bindAll(this, _.functionsIn(this).sort());
 
   this.advice = null;
   this.adviceTime = utc();

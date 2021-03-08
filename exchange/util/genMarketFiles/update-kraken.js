@@ -86,6 +86,12 @@ let getMinTradeSize = asset => {
   case 'FLOW':
     minTradeSize = '1'
     break;
+  case 'EWT':
+    minTradeSize = '1'
+    break;
+  case 'OCEAN':
+    minTradeSize = '10'
+    break;
   default:
     break;
   }

@@ -24,7 +24,9 @@
     "MANA",
     "AAVE",
     "ALGO",
-    "FLOW"
+    "FLOW",
+    "EWT",
+    "OCEAN"
   ],
   "currencies": [
     "CAD",
@@ -1343,6 +1345,40 @@
         "unit": "asset"
       },
       "pricePrecision": 3,
+      "amountPrecision": 8
+    },
+    {
+      "pair": [
+        "EUR",
+        "EWT"
+      ],
+      "prefixed": [
+        "EUR",
+        "EWT"
+      ],
+      "book": "EWTEUR",
+      "minimalOrder": {
+        "amount": "1",
+        "unit": "asset"
+      },
+      "pricePrecision": 3,
+      "amountPrecision": 8
+    },
+    {
+      "pair": [
+        "EUR",
+        "OCEAN"
+      ],
+      "prefixed": [
+        "EUR",
+        "OCEAN"
+      ],
+      "book": "OCEANEUR",
+      "minimalOrder": {
+        "amount": "10",
+        "unit": "asset"
+      },
+      "pricePrecision": 4,
       "amountPrecision": 8
     }
   ]
